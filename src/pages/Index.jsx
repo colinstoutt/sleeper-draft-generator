@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { HowToFindLeaugeId } from "../components/HowToId";
 
 export const Index = () => {
   const [leagueId, setLeagueId] = useState("");
   const [notValid, setNotValid] = useState(false);
-  const [toggleLearnMore, setToggleLearnMore] = useState(false);
+  const [toggleClickHere, setToggleClickHere] = useState(false);
 
   const navigate = useNavigate();
 
@@ -23,7 +24,7 @@ export const Index = () => {
 
   return (
     <main className="overflow-y-hidden">
-      <h1 className="mt-24 text-4xl font-semibold text-white text-center">
+      <h1 className="mt-24 p-4 text-4xl font-semibold text-white text-center">
         Sleeper League Draft Generator
       </h1>
       <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 max-w-2xl  p-8 min-w-full text-center rounded-lg  font-semibold">
@@ -56,11 +57,19 @@ export const Index = () => {
         )}
         <h6 className="text-sleeperGrey font-normal">
           Dont know league ID?{" "}
-          <span className="underline hover:text-teal active:text-darkTeal cursor-pointer">
+          <span
+            onClick={() => setToggleClickHere(!toggleClickHere)}
+            className="underline hover:text-teal active:text-darkTeal cursor-pointer"
+          >
             Click here
           </span>
         </h6>
       </div>
+      {toggleClickHere ? (
+        <HowToFindLeaugeId setToggleClickHere={setToggleClickHere} />
+      ) : (
+        <></>
+      )}
     </main>
   );
 };
