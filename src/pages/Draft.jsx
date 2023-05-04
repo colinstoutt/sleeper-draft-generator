@@ -1,23 +1,13 @@
 import React, { useEffect, useState } from "react";
+import Nav from "../components/Nav";
 
 export const Draft = () => {
-  const [leagueData, setLeagueData] = useState(null);
-  const [teamData, setTeamData] = useState(null);
-
   let league_id;
   if (typeof window !== "undefined") {
     league_id = localStorage.getItem("league_id");
   }
 
-  async function fetchLeagueData() {
-    try {
-      const res = await fetch(`https://api.sleeper.app/v1/league/${league_id}`);
-      const data = await res.json();
-      setLeagueData(data);
-    } catch (err) {
-      console.log(err);
-    }
-  }
+  const [teamData, setTeamData] = useState(null);
 
   async function fetchTeamData() {
     try {
@@ -32,12 +22,14 @@ export const Draft = () => {
   }
 
   useEffect(() => {
-    fetchLeagueData();
     fetchTeamData();
   }, []);
 
-  console.log(leagueData);
   console.log(teamData);
 
-  return <div>Draft</div>;
+  return (
+    <div>
+      <Nav />
+    </div>
+  );
 };
