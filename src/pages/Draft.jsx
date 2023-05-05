@@ -32,6 +32,8 @@ export const Draft = () => {
     fetchTeamData();
   }, []);
 
+  console.log(teamData);
+
   // on component mount and if teamData is truthy, set the draft order to a random array based on teamData array. If teamData changes, run the effect again.
   useEffect(() => {
     if (teamData) {
@@ -65,10 +67,10 @@ export const Draft = () => {
       <div>
         <Nav />
         <main className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-10 rounded-xl text-white h-3/4 w-5/6 overflow-y-scroll">
-          <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4">
-            {/* hiding the buttons when one of them is clicked */}
-            {!quickReveal && !slowReveal ? (
-              <div className="flex sm:flex-nowrap flex-wrap gap-4 fixed top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
+          {/* hiding the buttons when one of them is clicked */}
+          {!quickReveal && !slowReveal ? (
+            <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+              <div className="flex flex-col flex-wrap md:flex-row sm:flex-nowrap gap-4 ">
                 <div className="bg-lightBg p-8 rounded w-72">
                   <button
                     onClick={() => {
@@ -93,26 +95,47 @@ export const Draft = () => {
                   <p>Reveal entire draft order all at once.</p>
                 </div>
               </div>
-            ) : null}
+            </div>
+          ) : null}
 
-            {/* conditionally render the draft list based on whether quickReveal is truthy or not */}
-            <div className=" rounded-md p-4 mt-16">
+          {/* conditionally render the draft list based on whether quickReveal is truthy or not */}
+          <div className="">
+            <table>
               {quickReveal
                 ? draftOrder &&
                   draftOrder.map((team, index) => {
                     return (
-                      <>
-                        <div className="">
-                          <h1 className="text-5xl text-teal">{index + 1}</h1>
-                          <h1 key={index}>
+                      <tr>
+                        <td className="rank-bg flex justify-center text-5xl text-teal text-right px-2 py-4 w-28 h-28 rounded-xl mb-2 bg-blend-darken relative">
+                          <div
+                            className="w-28 h-28 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl"
+                            style={{
+                              backgroundImage: `url(${
+                                team.metadata.avatar ||
+                                "https://i.imgur.com/WA5KqKn.png"
+                              })`,
+                              backgroundSize: "contain",
+                              backgroundRepeat: "no-repeat",
+                              opacity: team.metadata.avatar ? 0.5 : 1,
+                            }}
+                          ></div>
+                          <h1 className="flex items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                            {index + 1}
+                          </h1>
+                        </td>
+                        <td
+                          key={index}
+                          className="text-white text-md pl-4 pr-6 py-4"
+                        >
+                          <h1 className="text-lg font-medium">
                             {team.metadata.team_name || team.display_name}
                           </h1>
-                        </div>
-                      </>
+                        </td>
+                      </tr>
                     );
                   })
                 : null}
-            </div>
+            </table>
           </div>
         </main>
       </div>
