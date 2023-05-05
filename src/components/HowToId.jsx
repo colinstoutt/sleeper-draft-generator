@@ -14,9 +14,14 @@ export const HowToFindLeaugeId = ({ setToggleClickHere }) => {
         alt="url"
       />
       <CloseRoundedIcon
-        className="cursor-pointer"
+        className="cursor-pointer text-sleeperGrey hover:text-white "
         onClick={() => setToggleClickHere(false)}
-        sx={{ position: "fixed", top: "1rem", right: "1rem" }}
+        sx={{
+          position: "fixed",
+          top: "1rem",
+          right: "1rem",
+          transition: "all 0.1s",
+        }}
       />
     </main>
   );
