@@ -21,6 +21,7 @@ module.exports = {
       darkTeal: "#284e57",
       btnText: "#022046",
       red: "#ff0000",
+      purple: "#5e71e4",
     },
     screens: {
       sm: "640px",
