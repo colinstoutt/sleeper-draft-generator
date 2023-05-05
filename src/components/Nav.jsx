@@ -33,7 +33,7 @@ const Nav = () => {
   console.log(leagueData);
 
   return (
-    <nav>
+    <nav className="z-50">
       <Link
         to="/home"
         className=" flex gap-4 items-center text-xl text-teal font-bold fixed top-5 left-5 px-6 py-2 text-sleeperGrey font-semibold"
