@@ -22,6 +22,7 @@ module.exports = {
       btnText: "#022046",
       red: "#ff0000",
       purple: "#5e71e4",
+      gold: "#f2b502",
     },
     screens: {
       sm: "640px",
