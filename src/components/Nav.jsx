@@ -11,6 +11,7 @@ const Nav = () => {
   }
   const [leagueData, setLeagueData] = useState(null);
 
+  // fetch league data so I can display the league name in the nav
   async function fetchLeagueData() {
     try {
       const res = await fetch(`https://api.sleeper.app/v1/league/${league_id}`);
@@ -25,6 +26,7 @@ const Nav = () => {
     }
   }
 
+  // on component mount, fetch league data
   useEffect(() => {
     fetchLeagueData();
   }, []);
@@ -36,6 +38,8 @@ const Nav = () => {
         to="/home"
         className=" flex gap-4 items-center text-xl text-teal font-bold fixed top-5 left-5 px-6 py-2 text-sleeperGrey font-semibold"
       >
+        {/* // "leagueData && leagueData.avatar" is checking to see if the data even exists before doing anthing else. if leagueData exists, render the avatar img.
+         */}
         {leagueData && leagueData.avatar ? (
           <img
             className="w-12 h-12 rounded-xl"
@@ -44,9 +48,7 @@ const Nav = () => {
             }`}
             alt=""
           />
-        ) : (
-          <></>
-        )}
+        ) : null}
 
         <h1 className="transition-all duration-300 text-white hover:text-teal active:text-teal">
           {leagueData && leagueData.name}
