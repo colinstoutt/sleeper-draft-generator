@@ -36,7 +36,7 @@ export const Index = () => {
           type="number"
           value={leagueId}
           onChange={handleChange}
-          className="leagueId sm:rounded-tl-md sm:rounded-bl-md sm:rounded-tr-none sm:rounded-br-none rounded pl-4 pr-2 py-1 "
+          className="text-center sm:rounded-tl-md sm:rounded-bl-md sm:rounded-tr-none sm:rounded-br-none rounded pl-4 pr-2 py-1 "
         />
         <br className="sm:hidden" />
         <button
@@ -52,14 +52,12 @@ export const Index = () => {
           <h6 className="text-red font-normal">
             Please enter a valid league ID
           </h6>
-        ) : (
-          <></>
-        )}
+        ) : null}
         <h6 className="text-sleeperGrey font-normal">
           Dont know league ID?{" "}
           <span
             onClick={() => setToggleClickHere(!toggleClickHere)}
-            className="underline hover:text-teal active:text-darkTeal cursor-pointer"
+            className="transition-all duration-200 underline hover:text-teal active:text-darkTeal cursor-pointer"
           >
             Click here
           </span>
@@ -67,9 +65,7 @@ export const Index = () => {
       </div>
       {toggleClickHere ? (
         <HowToFindLeaugeId setToggleClickHere={setToggleClickHere} />
-      ) : (
-        <></>
-      )}
+      ) : null}
     </main>
   );
 };
