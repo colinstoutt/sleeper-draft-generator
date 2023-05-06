@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Nav from "../components/Nav";
 import { CircularProgress } from "@mui/material";
+import chime from "../assets/chime.wav";
+import { Volume } from "../components/Volume";
 
 export const Draft = () => {
   // capture league id from local storage
@@ -8,11 +10,18 @@ export const Draft = () => {
   if (typeof window !== "undefined") {
     league_id = localStorage.getItem("league_id");
   }
+  // NFL draft chime sound for whenever a pick is made or quick reveal is clicked
+  function playChime() {
+    if (toggleVolume) {
+      new Audio(chime).play();
+    }
+  }
 
   const [teamData, setTeamData] = useState(null);
   const [draftOrder, setDraftOrder] = useState(null);
   const [slowReveal, setSlowReveal] = useState(false);
   const [quickReveal, setQuickReveal] = useState(false);
+  const [toggleVolume, setToggleVolume] = useState(true);
 
   // fetch data and set teamData state
   async function fetchTeamData() {
@@ -38,15 +47,15 @@ export const Draft = () => {
   useEffect(() => {
     if (teamData) {
       setDraftOrder(
-        // randomize draft order using Schwartzian transform.
+        // randomize order algorithm
+        // add a 'sort' property to each object in the teamData array. 'Sort' will have a value of a random number 0-1.
+        // sort through that new array of objects comparing values, if the result of the comparison is negative, b is bigger than a, if its positive a is bigger than b.
+        // create a new array based on the sort.
         teamData
           .map((value) => ({ value, sort: Math.random() }))
           .sort((a, b) => a.sort - b.sort)
           .map(({ value }) => value)
       );
-      // add a 'sort' property to each object in the teamData array. 'Sort' will have a value of a random value 0-1.
-      // sort through that new array of objects comparing values, if the result of the comparison is negative, b is bigger than a, if its positive a is bigger than b.
-      // create a new array based on the sort.
     }
   }, [teamData]);
 
@@ -66,7 +75,7 @@ export const Draft = () => {
     return (
       <div>
         <Nav />
-        <main className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-10 rounded-xl text-white h-3/4 w-5/6 overflow-y-scroll">
+        <main className="border-b border-lightBg absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-10 rounded-3xl text-white h-3/4 w-5/6 overflow-y-scroll">
           {/* hiding the buttons when one of them is clicked */}
           {!quickReveal && !slowReveal ? (
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -76,37 +85,43 @@ export const Draft = () => {
                     onClick={() => {
                       setSlowReveal(true);
                     }}
-                    className="px-6 py-4 mb-4 bg-darkTeal text-teal font-medium  rounded-xl uppercase shadow-md active:shadow-none"
+                    className="text-xl px-6 py-4 mb-4 bg-darkTeal text-teal font-medium  rounded-xl uppercase shadow-md active:shadow-none"
                   >
                     Slow Reveal
                   </button>
-                  <p>Reveal each draft position one at a time.</p>
+                  <p className="text-lg font-light">
+                    Click here to reveal each draft position one at a time.
+                  </p>
                 </div>
 
                 <div className="bg-lightBg p-8 rounded w-72">
                   <button
                     onClick={() => {
                       setQuickReveal(true);
+                      playChime();
                     }}
-                    className="px-6 py-4 mb-4 bg-darkTeal text-teal font-medium  rounded-xl uppercase shadow-md active:shadow-none"
+                    className="text-xl px-6 py-4 mb-4 bg-darkTeal text-teal font-medium  rounded-xl uppercase shadow-md active:shadow-none"
                   >
                     Quick Reveal
                   </button>
-                  <p>Reveal entire draft order all at once.</p>
+                  <p className="text-lg font-light">
+                    Click here to reveal the entire draft order all at once.
+                  </p>
                 </div>
               </div>
             </div>
           ) : null}
 
           {/* conditionally render the draft list based on whether quickReveal is truthy or not */}
-          <div className="">
-            <table className="absolute left-1/2 -translate-x-1/2">
-              {quickReveal
-                ? draftOrder &&
-                  draftOrder.map((team, index) => {
-                    return (
-                      <tr>
-                        <td className="rank-bg flex justify-center text-5xl text-teal text-right px-2 py-4 w-28 h-28 rounded-xl mb-2 bg-blend-darken relative">
+
+          <table className="absolute left-1/2 -translate-x-1/2  p-12 rounded">
+            {quickReveal
+              ? draftOrder &&
+                draftOrder.map((team, index) => {
+                  return (
+                    <tbody key={index}>
+                      <tr className="">
+                        <td className="flex justify-center text-5xl text-teal text-right px-2 py-4 w-28 h-28 rounded-xl mb-2 bg-blend-darken relative">
                           <div
                             className="w-28 h-28 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl"
                             style={{
@@ -123,20 +138,21 @@ export const Draft = () => {
                             {index + 1}
                           </h1>
                         </td>
-                        <td
-                          key={index}
-                          className="text-white text-md pl-4 pr-6 py-4"
-                        >
+                        <td className="text-white text-md pl-4 pr-6 py-4">
                           <h1 className="text-xl font-light">
                             {team.metadata.team_name || team.display_name}
                           </h1>
                         </td>
                       </tr>
-                    );
-                  })
-                : null}
-            </table>
-          </div>
+                    </tbody>
+                  );
+                })
+              : null}
+          </table>
+          <Volume
+            toggleVolume={toggleVolume}
+            setToggleVolume={setToggleVolume}
+          />
         </main>
       </div>
     );
