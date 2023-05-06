@@ -141,6 +141,6 @@ export const Draft = () => {
       </div>
     );
   };
-  // conditionally render the page based on if teamData is fully loaded in or not.
+  // conditionally render the page based on if teamData is fetched or not.
   return teamData ? loaded() : loading();
 };

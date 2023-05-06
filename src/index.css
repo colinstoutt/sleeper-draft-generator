@@ -23,6 +23,7 @@ body {
   font-family: "Poppins", Courier, monospace;
   background-color: #181f2e;
   overflow-y: hidden;
+  max-height: 100vh;
 }
 
 img,

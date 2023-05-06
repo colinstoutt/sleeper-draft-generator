@@ -36,7 +36,7 @@ const Nav = () => {
     <nav className="z-50">
       <Link
         to="/home"
-        className=" flex gap-4 items-center text-xl text-teal font-bold fixed top-5 left-5 px-6 py-2 text-sleeperGrey font-semibold"
+        className=" flex gap-4 items-center text-xl text-teal font-bold absolute top-5 left-5 px-6 py-2 text-sleeperGrey font-semibold"
       >
         {/* // "leagueData && leagueData.avatar" is checking to see if the data even exists before doing anthing else. if leagueData exists, render the avatar img.
          */}
