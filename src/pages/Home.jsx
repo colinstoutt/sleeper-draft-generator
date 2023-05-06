@@ -7,7 +7,7 @@ export const Home = () => {
   return (
     <main className="overflow-y-scroll">
       <Nav />
-      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white">
         <div className="flex sm:flex-nowrap flex-wrap sm:gap-x-10 gap-y-5">
           <Link
             to="/draft"

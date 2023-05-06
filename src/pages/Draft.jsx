@@ -66,10 +66,10 @@ export const Draft = () => {
     return (
       <div>
         <Nav />
-        <main className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-10 rounded-xl text-white h-3/4 w-5/6 overflow-y-scroll">
+        <main className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-10 rounded-xl text-white h-3/4 w-5/6 overflow-y-scroll">
           {/* hiding the buttons when one of them is clicked */}
           {!quickReveal && !slowReveal ? (
-            <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
               <div className="flex flex-col flex-wrap md:flex-row sm:flex-nowrap gap-4 ">
                 <div className="bg-lightBg p-8 rounded w-72">
                   <button
@@ -100,7 +100,7 @@ export const Draft = () => {
 
           {/* conditionally render the draft list based on whether quickReveal is truthy or not */}
           <div className="">
-            <table>
+            <table className="absolute left-1/2 -translate-x-1/2">
               {quickReveal
                 ? draftOrder &&
                   draftOrder.map((team, index) => {
@@ -116,10 +116,10 @@ export const Draft = () => {
                               })`,
                               backgroundSize: "contain",
                               backgroundRepeat: "no-repeat",
-                              opacity: team.metadata.avatar ? 0.5 : 1,
+                              opacity: team.metadata.avatar ? 0.4 : 1,
                             }}
                           ></div>
-                          <h1 className="flex items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                          <h1 className="flex items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
                             {index + 1}
                           </h1>
                         </td>
@@ -127,7 +127,7 @@ export const Draft = () => {
                           key={index}
                           className="text-white text-md pl-4 pr-6 py-4"
                         >
-                          <h1 className="text-lg font-medium">
+                          <h1 className="text-xl font-light">
                             {team.metadata.team_name || team.display_name}
                           </h1>
                         </td>
