@@ -22,6 +22,7 @@ body {
   min-height: 100vh;
   font-family: "Poppins", Courier, monospace;
   background-color: #181f2e;
+  overflow-y: hidden;
 }
 
 img,
@@ -43,4 +44,15 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type="number"] {
   -moz-appearance: textfield;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.example::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.example {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
