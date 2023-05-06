@@ -42,7 +42,7 @@ export const Index = () => {
         <button
           type="submit"
           onClick={handleSubmit}
-          className=" bg-teal px-4 py-1 sm:mb-2 mt-2 mb-4
+          className=" bg-teal px-4 py-1 sm:mb-2 mt-4 mb-4
         sm:rounded-tr-md sm:rounded-br-md sm:rounded-bl-none sm:rounded-tl-none
         rounded-lg active:bg-darkTeal active:text-teal"
         >
