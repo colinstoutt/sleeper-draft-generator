@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Nav from "../components/Nav";
-import { CircularProgress } from "@mui/material";
+import { Loader } from "../components/Loader";
 import chime from "../assets/chime.wav";
 import { Volume } from "../components/Volume";
 
@@ -12,16 +12,14 @@ export const Draft = () => {
   }
   // NFL draft chime sound for whenever a pick is made or quick reveal is clicked
   function playChime() {
-    if (toggleVolume) {
-      new Audio(chime).play();
-    }
+    new Audio(chime).play();
   }
 
   const [teamData, setTeamData] = useState(null);
   const [draftOrder, setDraftOrder] = useState(null);
   const [slowReveal, setSlowReveal] = useState(false);
   const [quickReveal, setQuickReveal] = useState(false);
-  const [toggleVolume, setToggleVolume] = useState(true);
+  let currentIndex = -1;
 
   // fetch data and set teamData state
   async function fetchTeamData() {
@@ -64,10 +62,9 @@ export const Draft = () => {
   // create 'loading' and 'loaded' components so the page doesnt crash since the data will be loading in asynchronously.
   const loading = () => {
     return (
-      <CircularProgress
-        className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-        sx={{ color: "rgb(0,206,184)" }}
-      />
+      <div className="absolute top-1/2 right-1/2 transform -translate-y-1/2 translate-x-1/2">
+        <Loader />
+      </div>
     );
   };
 
@@ -75,7 +72,7 @@ export const Draft = () => {
     return (
       <div>
         <Nav />
-        <main className="border-b border-lightBg absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-10 rounded-3xl text-white h-3/4 w-5/6 overflow-y-scroll">
+        <main className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-10 rounded-3xl text-white h-3/4 w-5/6 overflow-y-scroll">
           {/* hiding the buttons when one of them is clicked */}
           {!quickReveal && !slowReveal ? (
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -115,12 +112,44 @@ export const Draft = () => {
           {/* conditionally render the draft list based on whether quickReveal is truthy or not */}
 
           <table className="absolute left-1/2 -translate-x-1/2  p-12 rounded">
-            {quickReveal
-              ? draftOrder &&
-                draftOrder.map((team, index) => {
-                  return (
-                    <tbody key={index}>
-                      <tr className="">
+            <tbody>
+              {slowReveal
+                ? draftOrder &&
+                  draftOrder.map((team, index) => {
+                    return (
+                      <tr key={index}>
+                        <td className="flex justify-center text-5xl text-teal text-right px-2 py-4 w-28 h-28 rounded-xl mb-2 bg-blend-darken relative">
+                          <div
+                            className="w-28 h-28 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl"
+                            style={{
+                              backgroundImage: `url(${
+                                team.metadata.avatar ||
+                                "https://i.imgur.com/WA5KqKn.png"
+                              })`,
+                              backgroundSize: "contain",
+                              backgroundRepeat: "no-repeat",
+                              opacity: team.metadata.avatar ? 0.4 : 1,
+                            }}
+                          ></div>
+                          <h1 className="flex items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
+                            {index + 1}
+                          </h1>
+                        </td>
+                        <td className="text-white text-md pl-4 pr-6 py-4">
+                          <h1 className="text-xl font-light">
+                            {team.metadata.team_name || team.display_name}
+                          </h1>
+                        </td>
+                        <td></td>
+                      </tr>
+                    );
+                  })
+                : null}
+              {quickReveal
+                ? draftOrder &&
+                  draftOrder.map((team, index) => {
+                    return (
+                      <tr key={index}>
                         <td className="flex justify-center text-5xl text-teal text-right px-2 py-4 w-28 h-28 rounded-xl mb-2 bg-blend-darken relative">
                           <div
                             className="w-28 h-28 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl"
@@ -144,15 +173,11 @@ export const Draft = () => {
                           </h1>
                         </td>
                       </tr>
-                    </tbody>
-                  );
-                })
-              : null}
+                    );
+                  })
+                : null}
+            </tbody>
           </table>
-          <Volume
-            toggleVolume={toggleVolume}
-            setToggleVolume={setToggleVolume}
-          />
         </main>
       </div>
     );
