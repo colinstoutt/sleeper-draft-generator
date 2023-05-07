@@ -27,7 +27,7 @@ export const Index = () => {
       <h1 className="mt-24 p-4 text-4xl font-semibold text-white text-center">
         Sleeper League Draft Generator
       </h1>
-      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 max-w-2xl  p-8 min-w-full text-center rounded-lg  font-semibold">
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 max-w-2xl  p-8 min-w-full text-center rounded-lg  font-semibold">
         <h1 className="text-2xl mb-5 text-white">
           To start, please enter your Sleeper league ID below.
         </h1>
