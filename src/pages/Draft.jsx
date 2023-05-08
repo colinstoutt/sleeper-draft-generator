@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Nav from "../components/Nav";
 import { Loader } from "../components/Loader";
 import chime from "../assets/chime.wav";
-import { Volume } from "../components/Volume";
 
 export const Draft = () => {
   // capture league id from local storage
@@ -10,7 +9,7 @@ export const Draft = () => {
   if (typeof window !== "undefined") {
     league_id = localStorage.getItem("league_id");
   }
-  // NFL draft chime sound for whenever a pick is made or quick reveal is clicked
+  // NFL draft chime sound for whenever a draft starts
   function playChime() {
     new Audio(chime).play();
   }
@@ -22,6 +21,7 @@ export const Draft = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
+  // trigger button animation and set a time delay
   const handleRevealPick = () => {
     setIsAnimating(true);
     setTimeout(() => {
@@ -128,11 +128,11 @@ export const Draft = () => {
                   : "m-auto"
               }
             >
-              {/* conditionally render the draft list based on whether slowReveal is truthy or not */}
+              {/* conditionally render title based on current index or if quickReveal is truthy */}
               {currentIndex > 0 || quickReveal ? (
                 <h1 className="text-3xl font-semibold mb-8">Draft Order</h1>
               ) : null}
-
+              {/* conditionally render the draft list based on whether slowReveal is truthy or not */}
               {slowReveal
                 ? draftOrder &&
                   draftOrder.map((team, index) => {
@@ -152,13 +152,13 @@ export const Draft = () => {
                               }
                               alt={team.metadata.team_name || team.display_name}
                             ></img>
-                            <div className="flex items-center pl-4 text-darkTeal text-md bg-offWhite sm:h-24 h-16 w-96">
+                            <div className="flex items-center pl-4 text-darkTeal text-md bg-offWhite sm:h-24 h-16 w-96 overflow-y-hidden">
                               <h1
                                 className={
                                   team.metadata.team_name?.length > 15 ||
                                   team.display_name?.length > 15
-                                    ? "text-lg font-normal text-left"
-                                    : "text-xl font-normal text-left"
+                                    ? "sm:text-xl font-normal text-left"
+                                    : "sm:text-xl font-normal text-left"
                                 }
                               >
                                 {team.metadata.team_name || team.display_name}
@@ -189,13 +189,13 @@ export const Draft = () => {
                             }
                             alt={team.metadata.team_name || team.display_name}
                           ></img>
-                          <div className="flex items-center pl-4 text-darkTeal text-md bg-offWhite sm:h-24 h-16 w-96">
+                          <div className="flex items-center pl-4 text-darkTeal text-md bg-offWhite sm:h-24 h-16 w-96 overflow-y-hidden">
                             <h1
                               className={
                                 team.metadata.team_name?.length > 15 ||
                                 team.display_name?.length > 15
-                                  ? "text-lg font-normal text-left"
-                                  : "text-xl font-normal text-left"
+                                  ? "sm:text-xl font-normal text-left"
+                                  : "sm:text-xl font-normal text-left"
                               }
                             >
                               {team.metadata.team_name || team.display_name}
