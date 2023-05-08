@@ -150,8 +150,8 @@ export const Draft = () => {
                                 className={
                                   team.metadata.team_name?.length > 15 ||
                                   team.display_name?.length > 15
-                                    ? "text-lg font-normal"
-                                    : "text-xl font-normal"
+                                    ? "text-lg font-normal text-left"
+                                    : "text-xl font-normal text-left"
                                 }
                               >
                                 {team.metadata.team_name || team.display_name}
@@ -187,8 +187,8 @@ export const Draft = () => {
                               className={
                                 team.metadata.team_name?.length > 15 ||
                                 team.display_name?.length > 15
-                                  ? "text-lg font-normal"
-                                  : "text-xl font-normal"
+                                  ? "text-lg font-normal text-left"
+                                  : "text-xl font-normal text-left"
                               }
                             >
                               {team.metadata.team_name || team.display_name}
