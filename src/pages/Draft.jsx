@@ -206,8 +206,8 @@ export const Draft = () => {
                   }
                   className={
                     isAnimating
-                      ? "button-click-animation text-xl mb-4 py-6 sm:w-28 sm:h-28 bg-darkTeal text-teal font-medium rounded-xl"
-                      : "text-xl mb-4 py-6 sm:w-28 sm:h-28 bg-darkTeal text-teal font-medium rounded-xl"
+                      ? "button-click-animation text-xl mb-4 py-6 w-28 h-28 bg-darkTeal text-teal font-medium rounded-xl"
+                      : "text-xl mb-4 py-6 w-28 h-28 bg-darkTeal text-teal font-medium rounded-xl"
                   }
                 >
                   Reveal Pick {currentIndex + 1}
