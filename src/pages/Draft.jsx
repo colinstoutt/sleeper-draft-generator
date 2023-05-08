@@ -27,7 +27,7 @@ export const Draft = () => {
     setTimeout(() => {
       setCurrentIndex(currentIndex + 1);
       setIsAnimating(false);
-    }, 3000);
+    }, 1500);
   };
 
   console.log(currentIndex);
@@ -93,7 +93,7 @@ export const Draft = () => {
                       setSlowReveal(true);
                       playChime();
                     }}
-                    className="text-xl px-6 py-4 mb-4 bg-darkTeal text-teal font-medium  rounded-xl uppercase shadow-md active:shadow-none"
+                    className="text-xl px-6 py-4 mb-4 bg-darkTeal text-teal font-medium uppercase shadow-md active:shadow-none"
                   >
                     Slow Reveal
                   </button>
@@ -108,7 +108,7 @@ export const Draft = () => {
                       setQuickReveal(true);
                       playChime();
                     }}
-                    className="text-xl px-6 py-4 mb-4 bg-darkTeal text-teal font-medium  rounded-xl uppercase shadow-md active:shadow-none"
+                    className="text-xl px-6 py-4 mb-4 bg-darkTeal text-teal font-medium uppercase shadow-md active:shadow-none"
                   >
                     Quick Reveal
                   </button>
@@ -119,112 +119,111 @@ export const Draft = () => {
               </div>
             </div>
           ) : null}
+          <div
+            className={
+              currentIndex <= 0 ? "w-96 m-auto text-center" : "w-96 m-auto"
+            }
+          >
+            {/* conditionally render the draft list based on whether slowReveal is truthy or not */}
 
-          {/* conditionally render the draft list based on whether slowReveal is truthy or not */}
-          <table className="absolute left-1/2 -translate-x-1/2 p-12 ">
-            <tbody className="">
-              {slowReveal
-                ? draftOrder &&
-                  draftOrder.map((team, index) => {
-                    return (
-                      <tr key={index}>
-                        {currentIndex <= index ? null : (
-                          <>
-                            {" "}
-                            <td className="flex justify-center text-5xl text-teal text-right px-2 py-4 w-28 h-28 rounded-xl mb-2 bg-blend-darken relative">
-                              <div
-                                className="w-28 h-28 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl"
-                                style={{
-                                  backgroundImage: `url(${
-                                    team.metadata.avatar ||
-                                    "https://i.imgur.com/WA5KqKn.png"
-                                  })`,
-                                  backgroundSize: "contain",
-                                  backgroundRepeat: "no-repeat",
-                                  opacity: team.metadata.avatar ? 0.4 : 1,
-                                }}
-                              ></div>
-                              <h1 className="flex items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
-                                {index + 1}
-                              </h1>
-                            </td>
-                            <td className="text-white text-md pl-4 pr-6 py-4">
-                              <h1 className="text-xl font-light">
-                                {team.metadata.team_name || team.display_name}
-                              </h1>
-                            </td>
-                          </>
-                        )}
-                      </tr>
-                    );
-                  })
-                : null}
-              {/* conditionally render the draft list based on whether quickReveal is truthy or not */}
-              {quickReveal
-                ? draftOrder &&
-                  draftOrder.map((team, index) => {
-                    return (
-                      <tr key={index}>
-                        <td className="flex justify-center text-5xl text-teal text-right px-2 py-4 w-28 h-28 rounded-xl mb-2 bg-blend-darken relative">
-                          <div
-                            className="w-28 h-28 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl"
-                            style={{
-                              backgroundImage: `url(${
-                                team.metadata.avatar ||
-                                "https://i.imgur.com/WA5KqKn.png"
-                              })`,
-                              backgroundSize: "contain",
-                              backgroundRepeat: "no-repeat",
-                              opacity: team.metadata.avatar ? 0.4 : 1,
-                            }}
-                          ></div>
-                          <h1 className="flex items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
+            {slowReveal
+              ? draftOrder &&
+                draftOrder.map((team, index) => {
+                  return (
+                    <div key={index} className="mb-2">
+                      {currentIndex <= index ? null : (
+                        <div className="flex">
+                          {" "}
+                          <h1 className="text-3xl text-darkTeal bg-offWhite h-24 w-24 text-center pt-8">
                             {index + 1}
                           </h1>
-                        </td>
-                        <td className="text-white text-md pl-4 pr-6 py-4 w-12">
-                          <h1 className="text-xl font-light ">
-                            {/* if team name exceeds 15 characters, slice */}
-                            {team.metadata.team_name &&
-                            team.metadata.team_name.length > 20
-                              ? team.metadata.team_name.slice(0, 15) + "..."
-                              : team.metadata.team_name ||
-                                (team.display_name &&
-                                team.display_name.length > 20
-                                  ? team.display_name.slice(0, 15) + "..."
-                                  : team.display_name)}
+                          <img
+                            className="w-24 h-24"
+                            src={
+                              team.metadata.avatar ||
+                              "https://i.imgur.com/CSBmRl3.png"
+                            }
+                            alt={team.metadata.team_name || team.display_name}
+                          ></img>
+                          <div className="text-darkTeal text-md bg-offWhite h-24 w-96 pt-9 pl-6">
+                            <h1
+                              className={
+                                team.metadata.team_name?.length > 15 ||
+                                team.display_name?.length > 15
+                                  ? "text-lg font-normal"
+                                  : "text-xl font-normal"
+                              }
+                            >
+                              {team.metadata.team_name || team.display_name}
+                            </h1>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })
+              : null}
+            {/* conditionally render the draft list based on whether quickReveal is truthy or not */}
+            {quickReveal
+              ? draftOrder &&
+                draftOrder.map((team, index) => {
+                  return (
+                    <div key={index} className="mb-2">
+                      <div className="flex">
+                        {" "}
+                        <h1 className="text-3xl text-darkTeal bg-white h-24 w-24 pt-8">
+                          {index + 1}
+                        </h1>
+                        <img
+                          className="w-24 h-24"
+                          src={
+                            team.metadata.avatar ||
+                            "https://i.imgur.com/CSBmRl3.png"
+                          }
+                          alt={team.metadata.team_name || team.display_name}
+                        ></img>
+                        <div className="text-darkTeal text-md bg-white h-24 w-96 pt-9 pl-6">
+                          <h1
+                            className={
+                              team.metadata.team_name?.length > 15 ||
+                              team.display_name?.length > 15
+                                ? "text-lg font-normal text-left"
+                                : "text-xl font-normal text-left"
+                            }
+                          >
+                            {team.metadata.team_name || team.display_name}
                           </h1>
-                        </td>
-                      </tr>
-                    );
-                  })
-                : null}
-              {/* if current index is less than teamData.length, display button, else hide button */}
-              {slowReveal && currentIndex <= teamData.length - 1 ? (
-                <button
-                  onClick={() => handleRevealPick()}
-                  style={
-                    // conditional styling
-                    currentIndex < 1
-                      ? {
-                          paddingLeft: "2rem",
-                          paddingRight: "2rem",
-                          height: "76px",
-                          width: "197px",
-                        }
-                      : {}
-                  }
-                  className={
-                    isAnimating
-                      ? "button-click-animation text-xl mb-4 py-6 w-28 h-28 bg-darkTeal text-teal font-medium rounded-xl"
-                      : "text-xl mb-4 py-6 w-28 h-28 bg-darkTeal text-teal font-medium rounded-xl"
-                  }
-                >
-                  Reveal Pick {currentIndex + 1}
-                </button>
-              ) : null}
-            </tbody>
-          </table>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })
+              : null}
+            {/* if current index is less than teamData.length, display button, else hide button */}
+            {slowReveal && currentIndex <= teamData.length - 1 ? (
+              <button
+                onClick={() => handleRevealPick()}
+                style={
+                  // conditional styling
+                  currentIndex < 1
+                    ? {
+                        paddingLeft: "2rem",
+                        paddingRight: "2rem",
+                        height: "76px",
+                        width: "197px",
+                      }
+                    : {}
+                }
+                className={
+                  isAnimating
+                    ? "button-click-animation text-xl mb-4 w-full h-24 bg-white text-teal font-medium"
+                    : "text-xl mb-4 w-full h-24 bg-darkTeal text-teal font-medium"
+                }
+              >
+                Reveal Pick {currentIndex + 1}
+              </button>
+            ) : null}
+          </div>
         </main>
       </div>
     );

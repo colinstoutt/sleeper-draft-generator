@@ -23,6 +23,7 @@ module.exports = {
       red: "#ff0000",
       purple: "#5e71e4",
       gold: "#f2b502",
+      offWhite: "#f5f5f5",
     },
     screens: {
       sm: "640px",

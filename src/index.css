@@ -65,7 +65,7 @@ input[type="number"] {
     #2e3748 100%
   );
   background-size: 200% 100%;
-  animation: colorTransition 3s linear;
+  animation: colorTransition 1.5s linear;
 }
 
 @keyframes colorTransition {
