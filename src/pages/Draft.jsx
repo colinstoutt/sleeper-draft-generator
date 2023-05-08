@@ -119,29 +119,70 @@ export const Draft = () => {
               </div>
             </div>
           ) : null}
-          <div className={currentIndex <= 0 ? "m-auto text-center" : "m-auto"}>
-            {/* conditionally render the draft list based on whether slowReveal is truthy or not */}
 
-            {slowReveal
-              ? draftOrder &&
-                draftOrder.map((team, index) => {
-                  return (
-                    <div key={index} className="mb-2">
-                      {currentIndex <= index ? null : (
+          <div className="sm:flex sm:justify-center items-center">
+            <div
+              className={currentIndex <= 0 ? "m-auto text-center" : "m-auto"}
+            >
+              {/* conditionally render the draft list based on whether slowReveal is truthy or not */}
+
+              {slowReveal
+                ? draftOrder &&
+                  draftOrder.map((team, index) => {
+                    return (
+                      <div key={index} className="mb-2">
+                        {currentIndex <= index ? null : (
+                          <div className="flex">
+                            {" "}
+                            <h1 className="flex items-center justify-center sm:text-3xl text-xl text-darkTeal bg-offWhite sm:h-24 h-16 sm:w-24 w-24">
+                              {index + 1}
+                            </h1>
+                            <img
+                              className="sm:w-24 sm:h-24 w-16 h-16"
+                              src={
+                                team.metadata.avatar ||
+                                "https://i.imgur.com/CSBmRl3.png"
+                              }
+                              alt={team.metadata.team_name || team.display_name}
+                            ></img>
+                            <div className="flex items-center pl-4 text-darkTeal text-md bg-offWhite sm:h-24 h-16 w-96">
+                              <h1
+                                className={
+                                  team.metadata.team_name?.length > 15 ||
+                                  team.display_name?.length > 15
+                                    ? "text-lg font-normal"
+                                    : "text-xl font-normal"
+                                }
+                              >
+                                {team.metadata.team_name || team.display_name}
+                              </h1>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })
+                : null}
+              {/* conditionally render the draft list based on whether quickReveal is truthy or not */}
+              {quickReveal
+                ? draftOrder &&
+                  draftOrder.map((team, index) => {
+                    return (
+                      <div key={index} className="mb-2">
                         <div className="flex">
                           {" "}
-                          <h1 className="text-3xl text-darkTeal bg-offWhite h-24 w-24 text-center pt-8">
+                          <h1 className="flex items-center justify-center sm:text-3xl text-xl text-darkTeal bg-offWhite sm:h-24 h-16 sm:w-24 w-24">
                             {index + 1}
                           </h1>
                           <img
-                            className="w-24 h-24"
+                            className="sm:w-24 sm:h-24 w-16 h-16"
                             src={
                               team.metadata.avatar ||
                               "https://i.imgur.com/CSBmRl3.png"
                             }
                             alt={team.metadata.team_name || team.display_name}
                           ></img>
-                          <div className="text-darkTeal text-md bg-offWhite h-24 w-96 pt-9 pl-6">
+                          <div className="flex items-center pl-4 text-darkTeal text-md bg-offWhite sm:h-24 h-16 w-96">
                             <h1
                               className={
                                 team.metadata.team_name?.length > 15 ||
@@ -154,71 +195,35 @@ export const Draft = () => {
                             </h1>
                           </div>
                         </div>
-                      )}
-                    </div>
-                  );
-                })
-              : null}
-            {/* conditionally render the draft list based on whether quickReveal is truthy or not */}
-            {quickReveal
-              ? draftOrder &&
-                draftOrder.map((team, index) => {
-                  return (
-                    <div key={index} className="mb-2">
-                      <div className="flex">
-                        {" "}
-                        <h1 className="text-3xl text-darkTeal bg-white h-24 w-24 pt-8">
-                          {index + 1}
-                        </h1>
-                        <img
-                          className="w-24 h-24"
-                          src={
-                            team.metadata.avatar ||
-                            "https://i.imgur.com/CSBmRl3.png"
-                          }
-                          alt={team.metadata.team_name || team.display_name}
-                        ></img>
-                        <div className="text-darkTeal text-md bg-white h-24 w-96 pt-9 pl-6">
-                          <h1
-                            className={
-                              team.metadata.team_name?.length > 15 ||
-                              team.display_name?.length > 15
-                                ? "text-lg font-normal text-left"
-                                : "text-xl font-normal text-left"
-                            }
-                          >
-                            {team.metadata.team_name || team.display_name}
-                          </h1>
-                        </div>
                       </div>
-                    </div>
-                  );
-                })
-              : null}
-            {/* if current index is less than teamData.length, display button, else hide button */}
-            {slowReveal && currentIndex <= teamData.length - 1 ? (
-              <button
-                onClick={() => handleRevealPick()}
-                style={
-                  // conditional styling
-                  currentIndex < 1
-                    ? {
-                        paddingLeft: "2rem",
-                        paddingRight: "2rem",
-                        height: "76px",
-                        width: "197px",
-                      }
-                    : {}
-                }
-                className={
-                  isAnimating
-                    ? "button-click-animation text-xl mb-4 w-full h-24 bg-white text-teal font-medium"
-                    : "text-xl mb-4 w-full h-24 bg-darkTeal text-teal font-medium"
-                }
-              >
-                Reveal Pick {currentIndex + 1}
-              </button>
-            ) : null}
+                    );
+                  })
+                : null}
+              {/* if current index is less than teamData.length, display button, else hide button */}
+              {slowReveal && currentIndex <= teamData.length - 1 ? (
+                <button
+                  onClick={() => handleRevealPick()}
+                  style={
+                    // conditional styling
+                    currentIndex < 1
+                      ? {
+                          paddingLeft: "2rem",
+                          paddingRight: "2rem",
+                          height: "76px",
+                          width: "197px",
+                        }
+                      : {}
+                  }
+                  className={
+                    isAnimating
+                      ? "button-click-animation text-xl mb-4 w-full sm:h-24 h-16 bg-white text-teal font-medium"
+                      : "text-xl mb-4 w-full sm:h-24 h-16 bg-darkTeal text-teal font-medium"
+                  }
+                >
+                  Reveal Pick {currentIndex + 1}
+                </button>
+              ) : null}
+            </div>
           </div>
         </main>
       </div>
