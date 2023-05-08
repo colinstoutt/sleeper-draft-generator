@@ -122,7 +122,11 @@ export const Draft = () => {
 
           <div className="sm:flex sm:justify-center items-center">
             <div
-              className={currentIndex <= 0 ? "m-auto text-center" : "m-auto"}
+              className={
+                currentIndex <= 0
+                  ? "absolute top-1/2 right-1/2 transform -translate-y-1/2 translate-x-1/2"
+                  : "m-auto"
+              }
             >
               {/* conditionally render the draft list based on whether slowReveal is truthy or not */}
 
