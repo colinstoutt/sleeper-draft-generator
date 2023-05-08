@@ -119,11 +119,7 @@ export const Draft = () => {
               </div>
             </div>
           ) : null}
-          <div
-            className={
-              currentIndex <= 0 ? "w-96 m-auto text-center" : "w-96 m-auto"
-            }
-          >
+          <div className={currentIndex <= 0 ? "m-auto text-center" : "m-auto"}>
             {/* conditionally render the draft list based on whether slowReveal is truthy or not */}
 
             {slowReveal
