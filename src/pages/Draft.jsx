@@ -28,7 +28,6 @@ export const Draft = () => {
       setCurrentIndex(currentIndex + 1);
       setIsAnimating(false);
     }, 3000);
-    playChime();
   };
 
   console.log(currentIndex);
@@ -92,6 +91,7 @@ export const Draft = () => {
                   <button
                     onClick={() => {
                       setSlowReveal(true);
+                      playChime();
                     }}
                     className="text-xl px-6 py-4 mb-4 bg-darkTeal text-teal font-medium  rounded-xl uppercase shadow-md active:shadow-none"
                   >
@@ -206,8 +206,8 @@ export const Draft = () => {
                   }
                   className={
                     isAnimating
-                      ? "button-click-animation text-xl mb-4 py-6 sm:w-28 sm:h-28 bg-darkTeal text-teal font-medium rounded-xl uppercase"
-                      : "text-xl mb-4 py-6 sm:w-28 sm:h-28 bg-darkTeal text-teal font-medium rounded-xl uppercase"
+                      ? "button-click-animation text-xl mb-4 py-6 sm:w-28 sm:h-28 bg-darkTeal text-teal font-medium rounded-xl"
+                      : "text-xl mb-4 py-6 sm:w-28 sm:h-28 bg-darkTeal text-teal font-medium rounded-xl"
                   }
                 >
                   Reveal Pick {currentIndex + 1}
