@@ -1,5 +1,10 @@
 import React from "react";
+import Nav from "../components/Nav";
 
 export const LotteryDraft = () => {
-  return <div>LotteryDraft</div>;
+  return (
+    <main>
+      <Nav />
+    </main>
+  );
 };

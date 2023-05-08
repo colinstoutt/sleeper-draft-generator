@@ -54,3 +54,25 @@ input[type="number"] {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+.button-click-animation {
+  background: linear-gradient(
+    to left,
+    #284e57 0%,
+    #284e57 20%,
+    #284e57 50%,
+    #2e3748 50%,
+    #2e3748 20%,
+    #2e3748 100%
+  );
+  background-size: 200% 100%;
+  animation: colorTransition 3s linear;
+}
+
+@keyframes colorTransition {
+  from {
+    background-position: right;
+  }
+  to {
+    background-position: left;
+  }
+}

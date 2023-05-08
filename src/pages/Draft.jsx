@@ -19,8 +19,19 @@ export const Draft = () => {
   const [draftOrder, setDraftOrder] = useState(null);
   const [slowReveal, setSlowReveal] = useState(false);
   const [quickReveal, setQuickReveal] = useState(false);
-  let currentIndex = -1;
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
 
+  const handleRevealPick = () => {
+    setIsAnimating(true);
+    setTimeout(() => {
+      setCurrentIndex(currentIndex + 1);
+      setIsAnimating(false);
+    }, 3000);
+    playChime();
+  };
+
+  console.log(currentIndex);
   // fetch data and set teamData state
   async function fetchTeamData() {
     try {
@@ -72,7 +83,7 @@ export const Draft = () => {
     return (
       <div>
         <Nav />
-        <main className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-10 rounded-3xl text-white h-3/4 w-5/6 overflow-y-scroll">
+        <main className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-10 text-white h-3/4 w-5/6 overflow-y-scroll">
           {/* hiding the buttons when one of them is clicked */}
           {!quickReveal && !slowReveal ? (
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -111,36 +122,40 @@ export const Draft = () => {
 
           {/* conditionally render the draft list based on whether quickReveal is truthy or not */}
 
-          <table className="absolute left-1/2 -translate-x-1/2  p-12 rounded">
+          <table className="absolute left-1/2 -translate-x-1/2  p-12">
             <tbody>
               {slowReveal
                 ? draftOrder &&
                   draftOrder.map((team, index) => {
                     return (
                       <tr key={index}>
-                        <td className="flex justify-center text-5xl text-teal text-right px-2 py-4 w-28 h-28 rounded-xl mb-2 bg-blend-darken relative">
-                          <div
-                            className="w-28 h-28 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl"
-                            style={{
-                              backgroundImage: `url(${
-                                team.metadata.avatar ||
-                                "https://i.imgur.com/WA5KqKn.png"
-                              })`,
-                              backgroundSize: "contain",
-                              backgroundRepeat: "no-repeat",
-                              opacity: team.metadata.avatar ? 0.4 : 1,
-                            }}
-                          ></div>
-                          <h1 className="flex items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
-                            {index + 1}
-                          </h1>
-                        </td>
-                        <td className="text-white text-md pl-4 pr-6 py-4">
-                          <h1 className="text-xl font-light">
-                            {team.metadata.team_name || team.display_name}
-                          </h1>
-                        </td>
-                        <td></td>
+                        {currentIndex <= index ? null : (
+                          <>
+                            {" "}
+                            <td className="flex justify-center text-5xl text-teal text-right px-2 py-4 w-28 h-28 rounded-xl mb-2 bg-blend-darken relative">
+                              <div
+                                className="w-28 h-28 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl"
+                                style={{
+                                  backgroundImage: `url(${
+                                    team.metadata.avatar ||
+                                    "https://i.imgur.com/WA5KqKn.png"
+                                  })`,
+                                  backgroundSize: "contain",
+                                  backgroundRepeat: "no-repeat",
+                                  opacity: team.metadata.avatar ? 0.4 : 1,
+                                }}
+                              ></div>
+                              <h1 className="flex items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
+                                {index + 1}
+                              </h1>
+                            </td>
+                            <td className="text-white text-md pl-4 pr-6 py-4">
+                              <h1 className="text-xl font-light">
+                                {team.metadata.team_name || team.display_name}
+                              </h1>
+                            </td>
+                          </>
+                        )}
                       </tr>
                     );
                   })
@@ -176,6 +191,28 @@ export const Draft = () => {
                     );
                   })
                 : null}
+              {slowReveal && currentIndex <= teamData.length - 1 ? (
+                <button
+                  onClick={() => handleRevealPick()}
+                  style={
+                    currentIndex < 1
+                      ? {
+                          paddingLeft: "2rem",
+                          paddingRight: "2rem",
+                          height: "76px",
+                          width: "197px",
+                        }
+                      : {}
+                  }
+                  className={
+                    isAnimating
+                      ? "button-click-animation text-xl mb-4 py-6 sm:w-28 sm:h-28 bg-darkTeal text-teal font-medium rounded-xl uppercase"
+                      : "text-xl mb-4 py-6 sm:w-28 sm:h-28 bg-darkTeal text-teal font-medium rounded-xl uppercase"
+                  }
+                >
+                  Reveal Pick {currentIndex + 1}
+                </button>
+              ) : null}
             </tbody>
           </table>
         </main>
