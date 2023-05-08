@@ -129,7 +129,9 @@ export const Draft = () => {
               }
             >
               {/* conditionally render the draft list based on whether slowReveal is truthy or not */}
-              <h1 className="text-3xl font-semibold mb-8">Draft Order</h1>
+              {currentIndex > 0 || quickReveal ? (
+                <h1 className="text-3xl font-semibold mb-8">Draft Order</h1>
+              ) : null}
 
               {slowReveal
                 ? draftOrder &&
