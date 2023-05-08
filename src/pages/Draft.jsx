@@ -122,8 +122,8 @@ export const Draft = () => {
 
           {/* conditionally render the draft list based on whether quickReveal is truthy or not */}
 
-          <table className="absolute left-1/2 -translate-x-1/2  p-12">
-            <tbody>
+          <table className="absolute left-1/2 -translate-x-1/2 p-12 ">
+            <tbody className="">
               {slowReveal
                 ? draftOrder &&
                   draftOrder.map((team, index) => {
@@ -182,9 +182,16 @@ export const Draft = () => {
                             {index + 1}
                           </h1>
                         </td>
-                        <td className="text-white text-md pl-4 pr-6 py-4">
-                          <h1 className="text-xl font-light">
-                            {team.metadata.team_name || team.display_name}
+                        <td className="text-white text-md pl-4 pr-6 py-4 w-12">
+                          <h1 className="text-xl font-light ">
+                            {team.metadata.team_name &&
+                            team.metadata.team_name.length > 20
+                              ? team.metadata.team_name.slice(0, 15) + "..."
+                              : team.metadata.team_name ||
+                                (team.display_name &&
+                                team.display_name.length > 20
+                                  ? team.display_name.slice(0, 15) + "..."
+                                  : team.display_name)}
                           </h1>
                         </td>
                       </tr>
