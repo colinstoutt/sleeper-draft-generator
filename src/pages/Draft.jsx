@@ -120,8 +120,7 @@ export const Draft = () => {
             </div>
           ) : null}
 
-          {/* conditionally render the draft list based on whether quickReveal is truthy or not */}
-
+          {/* conditionally render the draft list based on whether slowReveal is truthy or not */}
           <table className="absolute left-1/2 -translate-x-1/2 p-12 ">
             <tbody className="">
               {slowReveal
@@ -160,6 +159,7 @@ export const Draft = () => {
                     );
                   })
                 : null}
+              {/* conditionally render the draft list based on whether quickReveal is truthy or not */}
               {quickReveal
                 ? draftOrder &&
                   draftOrder.map((team, index) => {
@@ -184,6 +184,7 @@ export const Draft = () => {
                         </td>
                         <td className="text-white text-md pl-4 pr-6 py-4 w-12">
                           <h1 className="text-xl font-light ">
+                            {/* if team name exceeds 15 characters, slice */}
                             {team.metadata.team_name &&
                             team.metadata.team_name.length > 20
                               ? team.metadata.team_name.slice(0, 15) + "..."
@@ -198,10 +199,12 @@ export const Draft = () => {
                     );
                   })
                 : null}
+              {/* if current index is less than teamData.length, display button, else hide button */}
               {slowReveal && currentIndex <= teamData.length - 1 ? (
                 <button
                   onClick={() => handleRevealPick()}
                   style={
+                    // conditional styling
                     currentIndex < 1
                       ? {
                           paddingLeft: "2rem",
