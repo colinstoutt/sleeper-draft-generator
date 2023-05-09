@@ -68,7 +68,7 @@ const Nav = () => {
     );
   };
 
-  return !leagueData ? loaded() : loading();
+  return leagueData ? loaded() : loading();
 };
 
 export default Nav;
