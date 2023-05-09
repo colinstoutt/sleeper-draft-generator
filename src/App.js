@@ -1,6 +1,9 @@
 import "./App.css";
 import { Main } from "./components/Main";
-import Nav from "./components/Nav";
+import ReactGA from "react-ga";
+
+const TRACKING_ID = "G-5LR0C8CXSG";
+ReactGA.initialize(TRACKING_ID);
 
 function App() {
   return (

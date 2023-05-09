@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { HowToFindLeaugeId } from "../components/HowToId";
+import ReactGA from "react-ga";
 
 export const Index = () => {
   const [leagueId, setLeagueId] = useState("");
@@ -21,6 +22,9 @@ export const Index = () => {
       setNotValid(true);
     }
   };
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname);
+  }, []);
 
   return (
     <main className="overflow-y-hidden">

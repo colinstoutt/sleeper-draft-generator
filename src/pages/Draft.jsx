@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Nav from "../components/Nav";
 import { Loader } from "../components/Loader";
 import chime from "../assets/chime.wav";
+import ReactGA from "react-ga";
 
 export const Draft = () => {
   // capture league id from local storage
@@ -47,6 +48,7 @@ export const Draft = () => {
   // on component mount, fetch team data
   useEffect(() => {
     fetchTeamData();
+    ReactGA.pageview(window.location.pathname);
   }, []);
 
   console.log(teamData);

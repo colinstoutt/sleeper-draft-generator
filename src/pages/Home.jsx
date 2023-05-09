@@ -2,8 +2,14 @@ import { Link } from "react-router-dom";
 import SportsFootballIcon from "@mui/icons-material/SportsFootball";
 import PercentIcon from "@mui/icons-material/Percent";
 import Nav from "../components/Nav";
+import ReactGA from "react-ga";
+import { useEffect } from "react";
 
 export const Home = () => {
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname);
+  }, []);
+
   return (
     <main>
       <Nav />
