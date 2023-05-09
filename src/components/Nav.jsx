@@ -32,30 +32,43 @@ const Nav = () => {
   }, []);
   console.log(leagueData);
 
-  return (
-    <nav className="">
-      <Link
-        to="/home"
-        className=" flex gap-4 items-center text-xl text-teal font-bold absolute top-5 left-5 px-6 py-2 text-sleeperGrey font-semibold"
-      >
-        {/* // "leagueData && leagueData.avatar" is checking to see if the data even exists before doing anthing else. if leagueData exists, render the avatar img.
-         */}
-        {leagueData && leagueData.avatar ? (
-          <img
-            className="w-12 h-12 rounded-xl"
-            src={`https://sleepercdn.com/avatars/${
-              leagueData && leagueData.avatar
-            }`}
-            alt=""
-          />
-        ) : null}
+  const loading = () => {
+    return (
+      <>
+        <div className="text-loading absolute top-8 left-10 w-40 h-2 bg-lightBg rounded-full"></div>
+        <div className="text-loading absolute top-11 left-10 w-24 h-2 bg-lightBg rounded-full"></div>
+      </>
+    );
+  };
 
-        <h1 className="transition-all duration-300 text-white hover:text-teal active:text-teal">
-          {leagueData && leagueData.name}
-        </h1>
-      </Link>
-    </nav>
-  );
+  const loaded = () => {
+    return (
+      <nav>
+        <Link
+          to="/home"
+          className=" flex gap-4 items-center text-xl text-teal font-bold absolute top-5 left-5 px-6 py-2 text-sleeperGrey font-semibold"
+        >
+          {/* // "leagueData && leagueData.avatar" is checking to see if the data even exists before doing anthing else. if leagueData exists, render the avatar img.
+           */}
+          {leagueData && leagueData.avatar ? (
+            <img
+              className="w-12 h-12 rounded-xl"
+              src={`https://sleepercdn.com/avatars/${
+                leagueData && leagueData.avatar
+              }`}
+              alt=""
+            />
+          ) : null}
+
+          <h1 className="transition-all duration-300 text-white hover:text-teal active:text-teal">
+            {leagueData && leagueData.name}
+          </h1>
+        </Link>
+      </nav>
+    );
+  };
+
+  return !leagueData ? loaded() : loading();
 };
 
 export default Nav;

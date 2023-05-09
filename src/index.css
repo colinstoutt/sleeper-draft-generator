@@ -76,3 +76,19 @@ input[type="number"] {
     background-position: left;
   }
 }
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.text-loading {
+  animation: pulse 1s infinite;
+}
