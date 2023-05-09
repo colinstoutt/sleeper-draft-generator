@@ -63,7 +63,7 @@ export const Draft = () => {
         }
         return newArray;
       }
-      setDraftOrder(shuffleArray(teamData));
+      setDraftOrder(shuffleArray(shuffleArray(teamData)));
     }
   }, [teamData]);
 
