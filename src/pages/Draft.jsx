@@ -52,9 +52,9 @@ export const Draft = () => {
   console.log(teamData);
 
   // on component mount and if teamData is truthy, set the draft order to a random array based on teamData array. If teamData changes, run the effect again.
-  // fish yates shuffle
   useEffect(() => {
     if (teamData) {
+      // fisher yates shuffle
       function shuffleArray(array) {
         const newArray = [...array];
         for (let i = newArray.length - 1; i > 0; i--) {
@@ -63,7 +63,7 @@ export const Draft = () => {
         }
         return newArray;
       }
-      setDraftOrder(shuffleArray(shuffleArray(teamData)));
+      setDraftOrder(shuffleArray(teamData));
     }
   }, [teamData]);
 
@@ -124,7 +124,7 @@ export const Draft = () => {
             <div
               className={
                 slowReveal && currentIndex <= 0
-                  ? "absolute top-1/2 right-1/2 transform -translate-y-1/2 translate-x-1/2 mb-12"
+                  ? "absolute top-1/2 right-1/2 transform -translate-y-1/2 translate-x-1/2"
                   : "m-auto"
               }
             >
@@ -136,7 +136,6 @@ export const Draft = () => {
               {slowReveal
                 ? draftOrder &&
                   draftOrder.map((team, index) => {
-                    const lastTeam = index === draftOrder.length - 1;
                     return (
                       <div key={index} className="mb-1.5">
                         {currentIndex <= index ? null : (

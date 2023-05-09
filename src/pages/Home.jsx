@@ -31,10 +31,10 @@ export const Home = () => {
               }}
             />
           </Link>
-          <Link
-            to="/lotteryDraft"
-            className="transition-all duration-200 sm:h-96 sm:w-72 h-52 w-72  bg-lightBg relative hover:text-teal active:text-teal rounded"
-          >
+          <div className=" relative overflow-hidden transition-all duration-200 sm:h-96 sm:w-72 h-52 w-72  bg-lightBg relative rounded cursor-default ">
+            <div className="absolute bottom-9 -right-10 -rotate-45 text-sm z-50 p-2 font-bold bg-gold text-black w-48 text-center uppercase">
+              Coming soon
+            </div>
             <h1 className="text-4xl font-semibold px-4 py-4">
               Generate
               <br />
@@ -63,7 +63,7 @@ export const Home = () => {
                 right: "3.1rem",
               }}
             />
-          </Link>
+          </div>
         </div>
       </div>
       <Link

@@ -24,6 +24,7 @@ module.exports = {
       purple: "#5e71e4",
       gold: "#f2b502",
       offWhite: "#f5f5f5",
+      black: "#000",
     },
     screens: {
       sm: "640px",
