@@ -52,22 +52,22 @@ export const Draft = () => {
   console.log(teamData);
 
   // on component mount and if teamData is truthy, set the draft order to a random array based on teamData array. If teamData changes, run the effect again.
+  // fish yates shuffle
   useEffect(() => {
     if (teamData) {
-      setDraftOrder(
-        // randomize order algorithm
-        // add a 'sort' property to each object in the teamData array. 'Sort' will have a value of a random number 0-1.
-        // sort through that new array of objects comparing values, if the result of the comparison is negative, b is bigger than a, if its positive a is bigger than b.
-        // create a new array based on the sort.
-        teamData
-          .map((value) => ({ value, sort: Math.random() }))
-          .sort((a, b) => a.sort - b.sort)
-          .map(({ value }) => value)
-      );
+      function shuffleArray(array) {
+        const newArray = [...array];
+        for (let i = newArray.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+        }
+        return newArray;
+      }
+      setDraftOrder(shuffleArray(teamData));
     }
   }, [teamData]);
 
-  console.log(draftOrder);
+  // console.log(draftOrder);
 
   // create 'loading' and 'loaded' components so the page doesnt crash since the data will be loading in asynchronously.
   const loading = () => {
@@ -82,7 +82,7 @@ export const Draft = () => {
     return (
       <div>
         <Nav />
-        <main className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-10 text-white h-3/4 w-5/6 overflow-y-scroll">
+        <main className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 p-10 text-white h-3/4 w-5/6">
           {/* hiding the buttons when one of them is clicked */}
           {!quickReveal && !slowReveal ? (
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
@@ -124,7 +124,7 @@ export const Draft = () => {
             <div
               className={
                 slowReveal && currentIndex <= 0
-                  ? "absolute top-1/2 right-1/2 transform -translate-y-1/2 translate-x-1/2"
+                  ? "absolute top-1/2 right-1/2 transform -translate-y-1/2 translate-x-1/2 mb-12"
                   : "m-auto"
               }
             >
@@ -136,8 +136,9 @@ export const Draft = () => {
               {slowReveal
                 ? draftOrder &&
                   draftOrder.map((team, index) => {
+                    const lastTeam = index === draftOrder.length - 1;
                     return (
-                      <div key={index} className="mb-2">
+                      <div key={index} className="mb-1.5">
                         {currentIndex <= index ? null : (
                           <div className="flex">
                             {" "}
@@ -148,12 +149,14 @@ export const Draft = () => {
                               className="sm:w-24 sm:h-24 w-16 h-16"
                               src={
                                 team.metadata.avatar ||
+                                // add default image incase user hasnt set a team avatar yet
                                 "https://i.imgur.com/CSBmRl3.png"
                               }
                               alt={team.metadata.team_name || team.display_name}
                             ></img>
                             <div className="flex items-center pl-4 text-darkTeal text-md bg-offWhite sm:h-24 h-16 w-96 overflow-y-hidden">
                               <h1
+                                // add logic so long team names dont mess with styling
                                 className={
                                   team.metadata.team_name?.length > 15 ||
                                   team.display_name?.length > 15
@@ -185,12 +188,14 @@ export const Draft = () => {
                             className="sm:w-24 sm:h-24 w-16 h-16"
                             src={
                               team.metadata.avatar ||
+                              // add default image incase user hasnt set a team avatar yet
                               "https://i.imgur.com/CSBmRl3.png"
                             }
                             alt={team.metadata.team_name || team.display_name}
                           ></img>
                           <div className="flex items-center pl-4 text-darkTeal text-md bg-offWhite sm:h-24 h-16 w-96 overflow-y-hidden">
                             <h1
+                              // add logic so long team names dont mess with styling
                               className={
                                 team.metadata.team_name?.length > 15 ||
                                 team.display_name?.length > 15
@@ -223,13 +228,15 @@ export const Draft = () => {
                   }
                   className={
                     isAnimating
-                      ? "button-click-animation text-xl mb-4 w-full sm:h-24 h-16 bg-white text-teal font-medium"
-                      : "text-xl mb-4 w-full sm:h-24 h-16 bg-darkTeal text-teal font-medium"
+                      ? "button-click-animation text-xl mb-24 w-full sm:h-24 h-16 bg-white text-teal font-medium"
+                      : "text-xl mb-24 w-full sm:h-24 h-16 bg-darkTeal text-teal font-medium"
                   }
                 >
                   Reveal Pick {currentIndex + 1}
                 </button>
-              ) : null}
+              ) : (
+                <div className="h-24"></div>
+              )}
             </div>
           </div>
         </main>

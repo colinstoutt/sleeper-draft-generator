@@ -66,6 +66,12 @@ export const Home = () => {
           </Link>
         </div>
       </div>
+      <Link
+        to="/"
+        className="absolute bottom-7 left-5 px-6 py-2 text-sleeperGrey hover:text-teal active:text-teal uppercase font-slim"
+      >
+        <h4 className="transition-all duration-300">Change League</h4>
+      </Link>
     </main>
   );
 };
