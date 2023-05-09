@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import Nav from "../components/Nav";
 import ReactGA from "react-ga";
 
