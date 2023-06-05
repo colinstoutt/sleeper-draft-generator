@@ -42,6 +42,7 @@ const Nav = () => {
   };
 
   const loaded = () => {
+    console.log(leagueData);
     return (
       <nav>
         <Link
@@ -64,6 +65,9 @@ const Nav = () => {
             {leagueData && leagueData.name}
           </h1>
         </Link>
+        <h2 className="absolute top-[3.3rem] left-5 px-6 py-2 text-sleeperGrey font-semibold text-sm">
+          League ID: {leagueData && leagueData.league_id}
+        </h2>
       </nav>
     );
   };
