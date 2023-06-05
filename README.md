@@ -1,9 +1,9 @@
 # Sleeper Draft Generator
 
 <div>
-  <img src="https://i.imgur.com/fhtSQQf.png" width="50%" height="50%" >          
-  <img src="https://i.imgur.com/5CyiAKV.png" width="50%" height="50%" >
-  <img src="https://i.imgur.com/Dw0O9Vy.png" width="50%" height="50%" >
+  <img src="https://i.imgur.com/fhtSQQf.png" width="30%" height="30%" >          
+  <img src="https://i.imgur.com/5CyiAKV.png" width="30%" height="30%" >
+  <img src="https://i.imgur.com/Dw0O9Vy.png" width="30%" height="30%" >
 <div/>
 
 ## About The Project
