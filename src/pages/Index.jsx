@@ -28,6 +28,9 @@ export const Index = () => {
 
   return (
     <main className="overflow-y-hidden">
+      <h1 className="text-sleeperGrey p-4 absolute bottom-0 left-0">
+        To demo, use league ID: 867824542855376896{" "}
+      </h1>
       <h1 className="mt-24 p-4 text-4xl font-semibold text-white text-center">
         Sleeper League Draft Generator
       </h1>
