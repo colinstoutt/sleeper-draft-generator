@@ -1,70 +1,23 @@
-# Getting Started with Create React App
+# Sleeper Draft Generator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<div>
+<!--   <img src="https://i.imgur.com/JEtS7Ht.png" width="25%" height="25%" >          
+  <img src="https://i.imgur.com/n7GZMew.png" width="25%" height="25%" >
+  <img src="https://i.imgur.com/ZMRlems.png" width="25%" height="25%" > -->
+<div/>
 
-## Available Scripts
+## About The Project
+The Sleeper Draft Generator was designed to assist fantasy football players in generating a random draft order for their league's draft. Additionally, it provides an order for a dynasty league's rookie draft by utilizing a lottery system. By storing a user's league ID in local storage and leveraging Sleeper's free API, this app can incorporate user data from their fantasy football league, resulting in a more personalized draft experience.
+  
+### Built With
+  * React
+  * Tailwind
+  
+## How to use
+  <a href='https://www.sleeperdraftgenerator.com/'>Live link<a/>
+    <br/>
+Enter the league ID of your Sleeper league. Upon accessing the home page, you will have the option to either generate a random draft order or use a lottery system to generate a random draft order. The app provides a quick reveal system for promptly displaying a randomized draft order, as well as a slow reveal system for a more dramatic experience, revealing each draft position one by one.
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Future Enhancments
+Finish the lottery system.
+ 
